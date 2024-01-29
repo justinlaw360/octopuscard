@@ -115,7 +115,42 @@ First	Last	Length	Field description
 
 
 ## octopus_reader
-Read Octopus Balance with Arduino Nano + PN532 NFC RFID module
+
+### PN532 NFC Module
+PN532是NXP公司推出的NFC控制器，基于80C51微控制器，可实现13.56 MHz的非接触式通信。此外，对MIFARE Classic 1K/MIFARE Classic 4K卡的支持允许双向传输速度高达424 kbit/s。
+![image](https://github.com/justinlaw360/octopuscard/assets/4946026/ba532692-4973-48c9-984b-b547b95fcd68)
+
+它带有40 Kb的ROM和1Kb的RAM，并且可以用于模拟ISO14443卡。 ISO/IEC 14443系列标准描述了用于国际交换的身份证或对象的参数。
+
+PN532 NFC模块的主要特点：
+●    基于具有40 KB的ROM和1 KB的RAM的80C51微控制器内核
+●    高度集成的解调器和解码器
+●    集成射频电平检测器
+●    支持 ISO/IEC 14443A/MIFARE
+●    支持 ISO/IEC 14443B（仅限读写器模式）
+●    在读卡器/写卡器模式下工作距离可达50毫米，用于与ISO/IEC 14443A/MIFARE、ISO/IEC 14443B 或 FeliCa 卡通信
+●    NFCIP-1 的工作距离可达50毫米，具体取决于天线尺寸、调谐和电源
+●    ISO/IEC 14443A/MIFARE 或 FeliCa 卡仿真模式下的操作距离约为 100mm
+●    可以使用外部模拟组件在 424 kbit/s 以上的RF接口上进行通信
+●    专用主机中断
+●    低功耗模式
+●    可编程定时器
+●    晶振
+●    2.7 至 5.5 V 电源工作范围
+
+通信模式的选择
+PN532 NFC模块的一大优势是它可以使用不同的协议与Arduino进行通信，例如UART、I2C或SPI。 这些不同的协议使用微控制器的特定引脚和库。
+![image](https://github.com/justinlaw360/octopuscard/assets/4946026/79a14ac8-8230-45dd-9f20-b545295455fb)
+
+要选择通信模式，必须使用拨码开关（0-Low，1-High）配置 PN532：
+
+         SEL0	SEL1
+UART       0   0
+SPI        0   1
+I2C        1   0
+
+
+## Read Octopus Balance with Arduino Nano + PN532 NFC RFID module
 Connection Diagram:
 
   Nano             PN532 b
@@ -126,8 +161,10 @@ Connection Diagram:
 +   A4 +----------+ SDA  +
 +------+          +------+
 
+![image](https://github.com/justinlaw360/octopuscard/assets/4946026/8c3e4414-1a5e-4912-965d-deeac3ef75f1)
 
 ### Description
 The software initiate a InListPassiveTarget command to poll for an octopus card, then it send a "Read Without Encryption" command to the card with service code 0x117 to read 16 bytes from the card. The first 4 bytes (big endian) contain the adjusted balance.
 The balance can be calculated by
 (adjusted balance - 350)/10
+
