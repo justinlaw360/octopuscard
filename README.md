@@ -51,21 +51,22 @@ TNF用于描述一个NFC Record中数据（Payload）的类型，为了方便应
 
 
 ## 目前NFC支持七种数据类型：
-Empty：表示该Record中没有数据，即相当于一个空的NFC Record
-NFC Forum Well-Known Type：由NFC Forum定义的一些较为常用的数据类型，包括URI、TEXT等，其格式遵循NFC Forum RTD（Record Type Definition）规范。下文将详细介绍它。
-MIME：它是Multipurpose Internet Mail Extensions的缩写，遵循RFC2046规范。例如，当TNF取值为MIME时，其Type字段取值可为"text/plain"或"image/png"等。
-Absolute URI：绝对URI，遵循RFC 3986规范。例如某文件的绝对URI为"http:/ http://android.com/robots.txt%22%EF%BC%8C%E8%80%8C%E5%85%B6%E7%9B%B8%E5%AF%B9URI%E5%88%99%E4%B8%BA%22robots.txt"。
-NFC Forum External Type：也由NFC Forum的RTD规范定义，下文将介绍它。
-Unknown：代表Payload中的数据类型未知，它和MIME类型"application/octet-stream"有些类似，这种类型的数据由相应的应用程序来解析。
-Unchanged：这种类型的数据用于NFC Record分片。例如一个大的数据需要通过多个NFC Record来承载，除第一个NFC Record分片外，该数据对应的其他NFC Record分片都必须设置TNF为Unchanged。关于这部分内容，读者可参考NDEF规范的2.3.3节"Record Chunks"
+	1. Empty：表示该Record中没有数据，即相当于一个空的NFC Record
+	2. NFC Forum Well-Known Type：由NFC Forum定义的一些较为常用的数据类型，包括URI、TEXT等，其格式遵循NFC Forum RTD（Record Type Definition）规范。下文将详细介绍它。
+	3. MIME：它是Multipurpose Internet Mail Extensions的缩写，遵循RFC2046规范。例如，当TNF取值为MIME时，其Type字段取值可为"text/plain"或"image/png"等。
+	4. Absolute URI：绝对URI，遵循RFC 3986规范。例如某文件的绝对URI为"http:/ http://android.com/robots.txt%22%EF%BC%8C%E8%80%8C%E5%85%B6%E7%9B%B8%E5%AF%B9URI%E5%88%99%E4%B8%BA%22robots.txt"。
+	5. NFC Forum External Type：也由NFC Forum的RTD规范定义，下文将介绍它。
+	6. Unknown：代表Payload中的数据类型未知，它和MIME类型"application/octet-stream"有些类似，这种类型的数据由相应的应用程序来解析。
+	7. Unchanged：这种类型的数据用于NFC Record分片。例如一个大的数据需要通过多个NFC Record来承载，除第一个NFC Record分片外，该数据对应的其他NFC Record分片都必须设置TNF为Unchanged。关于这部分内容，读者可参考NDEF规范的2.3.3节"Record Chunks"
+
 在TNF七大类型中，NFC Forum通过RTD规范定义了其中的WKT（Well-KnownType）和External Type两种类型。虽然RTD规范全长只有20来页，但阅读起来比较枯燥，在此，笔者总结其核心内容。
-简单点说，WKT就是NFC Forum自己定义的一些常用数据类型，目前常用类型如下。
-URI Record Type：用于存储URI数据，对应Type字段取值为"U"。
-Text Record Type：用于存储文本数据，对应Type字段取值为"T"。
-Signature Record Type：用于存储数字签名数据，对应Type字段取值为"Sig"。
-Smart Poster Record Type：智能海报，用于存储与该海报相关的一些资讯信息，如图片、相关介绍等，对应Type字段取值为"Sp"
-Generic Control Record Type：用于传递控制信息，对应Type字段取值为"Gc"
-External Type：为第三方组织定义的类型，目前NFC Forum没有定义相关的数据
+	- 简单点说，WKT就是NFC Forum自己定义的一些常用数据类型，目前常用类型如下。
+	- URI Record Type：用于存储URI数据，对应Type字段取值为"U"。
+	- Text Record Type：用于存储文本数据，对应Type字段取值为"T"。
+	- Signature Record Type：用于存储数字签名数据，对应Type字段取值为"Sig"。
+	- Smart Poster Record Type：智能海报，用于存储与该海报相关的一些资讯信息，如图片、相关介绍等，对应Type字段取值为"Sp"
+	- Generic Control Record Type：用于传递控制信息，对应Type字段取值为"Gc"
+	- External Type：为第三方组织定义的类型，目前NFC Forum没有定义相关的数据
 类型。
 NFC Record实例
 URI Record Type实例
