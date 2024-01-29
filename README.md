@@ -66,17 +66,19 @@ TNF用于描述一个NFC Record中数据（Payload）的类型，为了方便应
 	- Signature Record Type：用于存储数字签名数据，对应Type字段取值为"Sig"。
 	- Smart Poster Record Type：智能海报，用于存储与该海报相关的一些资讯信息，如图片、相关介绍等，对应Type字段取值为"Sp"
 	- Generic Control Record Type：用于传递控制信息，对应Type字段取值为"Gc"
-	- External Type：为第三方组织定义的类型，目前NFC Forum没有定义相关的数据
-类型。
-NFC Record实例
-URI Record Type实例
+	- External Type：为第三方组织定义的类型，目前NFC Forum没有定义相关的数据类型。
+ 
+## NFC Record实例
+### URI Record Type实例
 URI Record Type属于NFC Forum Well-known Type的一种，其对应的Type字段取值为"U"。对于这种类型的NFC Record，其Payload组织结构如表所示。
-
+![image](https://github.com/justinlaw360/octopuscard/assets/4946026/56aa493c-7b2f-4a57-9731-26555556b22f)
 
 在URI Record Payload中，第一个字节指明URI的ID码，表8-4为NFC Forum定义的几种ID码。
+![image](https://github.com/justinlaw360/octopuscard/assets/4946026/c197ecd5-0e27-4afd-b707-f89939bb2c9b)
 
 
 了解上述信息后，我们来看"http:/ http://www.nfc.com/"这样的信息该如何封装为一个NDEF消息，图8-7所示为NDEF消息各字段的取值情况。
+![image](https://github.com/justinlaw360/octopuscard/assets/4946026/307b974c-fd89-462d-8d9c-19aa36338e03)
 
 
 由于该NDEF消息只包含一个NFC Record，所以这个唯一的NFC Record将设置MB和ME标志位为1。另外，由于数据量小于255字节，所以SR标志位为1。最后，该Record携带的数据属于URI类型，它为Well-Known Type的一种，所以TNF取值为0x01。
@@ -86,89 +88,15 @@ Type Length字段取值为0x01，对应的Type字段取值为"U"，代表URI Rec
 当应用程序获取Payload信息后，将根据ID Code和Data的取值最终计算出对应的URI为"http:/ http://www.nfc.com/"
 Text Record Type实例
 Text Record Type和URI Record Type类似，其Payload组织结构如表8-5所示。
+![image](https://github.com/justinlaw360/octopuscard/assets/4946026/33436c90-92f8-4218-a771-76ff282d4874)
+
+![image](https://github.com/justinlaw360/octopuscard/assets/4946026/933aaf46-e41f-4300-837a-2247c7ca2e23)
+
+图所示为携带"Hello World"字符串信息的NDEF消息各字段的取值情况。可参考 URI Record进行解析。
 
 
-
-
-图8-8所示为携带"Hello World"字符串信息的NDEF消息各字段的取值情况。可参考 URI Record进行解析。
-基本流程图
-
-
-
-所需准备的材料
-原加密卡一张 ，新卡一张（如果是加密卡推荐买CUID）；
-windows系统安装MifareOneTool软件 （不行用虚拟机跑Windows系统；文末会给MifareOneTool软件的下载方式）；
-接口转换器 PL2303或CH340 ；
-读卡模块 PN532 ；
-杜邦线若干；
-PL2303（或CH340）与PN532的连接方式
-实物连接如图：
-（不要动PN532下方的拨码开关）
-
-连接示意如图：
-（这里实际上是UART的连接，只是PN532的丝印给的是I2C的，为了方便新手画了个简易的图片）
-
-
-门禁卡复制门禁卡
-
-
-
-图片步骤已经很详细了，这里补充几点注意事项
-
-2步骤说的放门禁卡是放要解密的门禁卡，不是新卡；
-检测卡牌 SAK=08 就说明有戏；
-第五步，是拿下原卡，放上新卡，然后点击
-
-
-手环复制门禁卡
-这里面原理不多讲，感兴趣可以自己搜，跟着步骤来就行。
-
-1、重复<门禁卡复制门禁卡>教程的前四步
-
-
-
-2、修改并保存后缀为.mfd文件
-
-1、在上方菜单栏中，点击高级操作模式->Hex编辑器；
-
-
-
-2、打开之前保存的后缀为.dump文件（否则直接点击0扇区出现的是乱码，是错误的）；
-
-
-3、点击扇区0，后选中第0块的前8位数字，复制（右击或ctrl+c）；
-
-
-4、之后点击文件->新建，新建一个文件
-
-
-
-
-5、点击工具->修改UID，并在弹窗界面内粘贴复制的8位序列号
-
-
-6、点击另存为（此文件为.mfd为后缀的文件）
-
-
-利用后缀为mfd文件开卡，用dump文件写全卡密
-这一步较为简单，就不再一一粘贴图片了。
-
-
-1、在高级操作模式中点击CUID写，将后缀为mdf的文件写入新卡；
-2、将手环放置新卡上，在手机APP界面（例如：小米运动）选择卡包->添加新门卡->模拟门卡，用于开卡。
-3、开卡完成后，请将手环放置在PN532读卡模块上，进行<门禁卡复制门禁卡>教程的第五步，如图，点击CUID写->选择后缀为dump的文件写全卡密。
-
-
-
-一些注意事项
-1、在使用PN532过程中，请保证该模块不受干扰。即模块旁边不要出现不相干的其他物品，或将该模块放置于金属物品之上。
-2、除手环复制门禁卡最后一步，只能写入63/64个块。其他写入过程都应该是64/64。如果没有写入完成，再次写入一次（或多次）即可。
-
-
-
-
-
-https://github.com/metrodroid/metrodroid/wiki/FeliCa cards normally respond to a poll for all System Codes, and polling for Service Codes in a System Code. However some older Octopus cards do not respond to this.
+## FeliCa cards
+FeliCa cards normally respond to a poll for all System Codes, and polling for Service Codes in a System Code. However some older Octopus cards do not respond to this.
 Metrodroid works around this by explicitly polling for Octopus' System Code and then presuming the Octopus Balance Service Code will also be present. This is also applied to first-generation SZT cards -- though we don't have any samples, we presume the bugs will be the same... :)
 
 Card	System Code	Balance Service Code	
