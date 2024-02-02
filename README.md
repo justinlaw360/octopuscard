@@ -153,18 +153,11 @@ I2C        1   0
 ## Read Octopus Balance with Arduino Nano + PN532 NFC RFID module
 Connection Diagram:
 
-  Nano             PN532 b
-+------+          +------+
-+  +5V +----------+ VCC  +
-+  GND +----------+ GND  +  
-+   A5 +----------+ SCL  +  
-+   A4 +----------+ SDA  +
-+------+          +------+
+![image](https://github.com/justinlaw360/octopuscard/assets/4946026/2427f41a-ad67-4071-8675-72dc5d1cbc8b)
 
-![image](https://github.com/justinlaw360/octopuscard/assets/4946026/8c3e4414-1a5e-4912-965d-deeac3ef75f1)
+![image](https://github.com/justinlaw360/octopuscard/assets/4946026/2562f1cf-6a37-44a5-bd5b-61013cd5750f)
 
-### Description
-The software initiate a InListPassiveTarget command to poll for an octopus card, then it send a "Read Without Encryption" command to the card with service code 0x117 to read 16 bytes from the card. The first 4 bytes (big endian) contain the adjusted balance.
-The balance can be calculated by
-(adjusted balance - 350)/10
+
+### Video demo
+
 
