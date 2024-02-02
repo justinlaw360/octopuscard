@@ -149,6 +149,15 @@ UART       0   0
 SPI        0   1
 I2C        1   0
 
+## PN532 Driver
+This is an Arduino library for PN532 to use NFC technology.
+https://github.com/elechouse/PN532/
+
+For reading HK Octopus card, the memory buffer of wire.h and twi.h has to be changed 64 instead of the default value 32.  You should find these files in your Arduino library folder.
+![image](https://github.com/justinlaw360/octopuscard/assets/4946026/a2abb428-5ec5-4da9-9457-ad580c67fb0d)
+
+![image](https://github.com/justinlaw360/octopuscard/assets/4946026/a563e6fe-a99e-4de4-bd8b-8e48f9b8b6b1)
+
 
 ## Read Octopus Balance with Arduino Nano + PN532 NFC RFID module
 Connection Diagram:
