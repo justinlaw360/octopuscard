@@ -168,5 +168,5 @@ Connection Diagram:
 
 
 ## Video demo
-
+![image](https://github.com/justinlaw360/octopuscard/blob/main/demo.mp4)
 
