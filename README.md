@@ -1,4 +1,4 @@
-# Retrieve HK Octopus card
+# Reading HK Octopus card info
 To read HK Octopus card using PN532 NFC module
 
 ## What is NFC (Wiki)
@@ -95,7 +95,7 @@ Text Record Type和URI Record Type类似，其Payload组织结构如表8-5所示
 图所示为携带"Hello World"字符串信息的NDEF消息各字段的取值情况。可参考 URI Record进行解析。
 
 
-## FeliCa cards
+### FeliCa cards
 FeliCa cards normally respond to a poll for all System Codes, and polling for Service Codes in a System Code. However some older Octopus cards do not respond to this.
 Metrodroid works around this by explicitly polling for Octopus' System Code and then presuming the Octopus Balance Service Code will also be present. This is also applied to first-generation SZT cards -- though we don't have any samples, we presume the bugs will be the same... :)
 
@@ -114,7 +114,7 @@ First	Last	Length	Field description
 14	15	2	unknown	
 
 
-## octopus_reader
+## Octopus_reader
 
 ### PN532 NFC Module
 PN532是NXP公司推出的NFC控制器，基于80C51微控制器，可实现13.56 MHz的非接触式通信。此外，对MIFARE Classic 1K/MIFARE Classic 4K卡的支持允许双向传输速度高达424 kbit/s。
@@ -167,6 +167,6 @@ Connection Diagram:
 ![image](https://github.com/justinlaw360/octopuscard/assets/4946026/2562f1cf-6a37-44a5-bd5b-61013cd5750f)
 
 
-### Video demo
+## Video demo
 
 
