@@ -164,7 +164,7 @@ Connection Diagram:
 
 ![image](https://github.com/justinlaw360/octopuscard/assets/4946026/2427f41a-ad67-4071-8675-72dc5d1cbc8b)
 
-![image](https://github.com/justinlaw360/octopuscard/assets/4946026/2562f1cf-6a37-44a5-bd5b-61013cd5750f)
+[![Watch the video]](https://github.com/justinlaw360/octopuscard/assets/4946026/2562f1cf-6a37-44a5-bd5b-61013cd5750f)
 
 
 ## Video demo
